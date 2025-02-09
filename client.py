@@ -2,6 +2,7 @@ import asyncio
 import websockets
 import json
 from websockets.exceptions import ConnectionClosedError, WebSocketException
+import os
 import platform
 import glob
 
@@ -100,9 +101,24 @@ elif platform.system().lower().startswith("linux"):
             return f.read().strip() == "1"
 
     def set_capslock_state(enabled):
+        session_type = os.environ["XDG_SESSION_TYPE"]
+        if session_type == "wayland":
+            set_capslock_state_wayland(enabled)
+        else:
+            set_capslock_state_x(enabled)
+
+    def set_capslock_state_x(enabled):
         state = get_capslock_state()
         if state != enabled:
             subprocess.run(["xdotool", "key", "Caps_Lock+Caps_Lock"], check=True)
+
+    def set_capslock_state_wayland(enabled):
+        state = get_capslock_state()
+        if state != enabled:
+            # fOR Some reASON, cApS_lOck+CAPS_lOCk dOESN'T work WITH
+            # YdOTOOL, USINg 58 EXPLiCITLY WORKS.
+            subprocess.run(["ydotool", "key", "58:1", "58:0"], check=True)
+
 else:
     plat = platform.system()
     raise NotImplementedError(f"Unsupported platform: {plat}")
@@ -131,6 +147,8 @@ async def run_client():
         last_state = False
         while True:
             current_state = get_capslock_state()
+            print(current_state)
+            print(last_state)
 
             if current_state != last_state:
                 message = "1" if current_state else "0"

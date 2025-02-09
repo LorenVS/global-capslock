@@ -27,7 +27,8 @@ IDK JUST MAKE SURE YOU KNOW how to stop a procesS BEFORE RUNNING IT
 NO TESTS i wrote most of it over thE WEEKEND BUT I TESTED IT ON EACH PLATFORM ONE TO THREE TIMES
 
 ### WHAT PLATFORMS ARE SUPPORTED
-mAC, wINDOWS, AND lINUX. BUt Linux requires that you insTALL `xdotool` SO MAKE SURE TO DO THAT
+mAC, wINDOWS, AND lINUX. uSING Linux reQUIRES yOU TO INSTALL `xdotool` fOR x EnVIRONMENTS, And
+rEQUIRES `ydotool` FoR wAyLAnd.
 
 ### HOW TO INSTALL??
 
@@ -43,9 +44,6 @@ OR
 * ACTIVATE VIRTUAL ENVIronment
 * `pip install -r requirements.txt`
 * `python client.py`
-
-### doeSNT WORK BECAUSE I'M RUNNING WAYLAND
-PLEASE SUBMIT A PULL REQUEST i don't have a gooD MACHINE TO TEST ON
 
 ### SHOULD I DO THIS
 
